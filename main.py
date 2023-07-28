@@ -8,7 +8,7 @@ import pandas as pd
 list_serach_job = ["後端工程師", "軟體工程師", "Java", "Django"]
 
 # 创建一个空的DataFrame用于存储数据
-df = pd.DataFrame(columns=['職缺名稱', '職缺連結', '公司名稱', '地區', '月薪', '給薪方式'])
+df = pd.DataFrame(columns=['職缺名稱', '職缺連結', '公司名稱', '薪水', '地區'])
 
 for serach_job in list_serach_job:
   page = 0
@@ -31,20 +31,21 @@ for serach_job in list_serach_job:
     for job in soup.find_all(
         'div', class_='JobSearchPage_searchResults__yLBAf')[0].find_all(
           'div', class_='JobSearchItem_wrapper__0zoCh'):
-      job1 = job.find_all('a', 'JobSearchItem_jobTitle__Fjzv2')[0].text
-      job2 = 'https://www.cakeresume.com' + job.find_all(
+      job_title = job.find_all('a', 'JobSearchItem_jobTitle__Fjzv2')[0].text
+      job_url = 'https://www.cakeresume.com' + job.find_all(
         'div', class_='JobSearchItem_headerTitle__k_1FH')[0].a['href']
-      job3 = job.find_all('div', 'JobSearchItem_headerSubtitle__XoiMM')[0].text
-      job5 = job.find_all(
+      company_title = job.find_all(
+        'div', 'JobSearchItem_headerSubtitle__XoiMM')[0].text
+      salary = job.find_all(
         'div',
         class_=
         'InlineMessage_inlineMessage__I9C_W InlineMessage_inlineMessageLarge__yeH0A InlineMessage_inlineMessageDark__rNo_a'
       )[2].text
-      print(job1, job2, job3, job5)
-      job51 = job5[0:job5.find('/')]
-      job52 = job5[job5.find('/') + 1:len(job5)].replace(" ", "")
+      print(job_title, job_url, company_title, salary)
+      job51 = salary[0:salary.find('/')]
+      job52 = salary[salary.find('/') + 1:len(salary)].replace(" ", "")
       price = ''
-      for word in job5:
+      for word in salary:
         if word == '0' or word == '1' or word == '2' or word == '3' or word == '4' or word == '5' or word == '6' or word == '7' or word == '8' or word == '9' or word == '.' or word == '~' or word == '萬':
           price += word
       low_price = ''
@@ -59,11 +60,10 @@ for serach_job in list_serach_job:
       print(low_price, high_price)
       df = df._append(
         {
-          '職缺名稱': job1,
-          '職缺連結': job2,
-          '公司名稱': job3,
-          '地區': job5,
-          '月薪': job52
+          '職缺名稱': job_title,
+          '職缺連結': job_url,
+          '公司名稱': company_title,
+          '薪水': salary,
         },
         ignore_index=True)
     print("頁數", page)
