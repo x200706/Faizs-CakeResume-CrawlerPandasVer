@@ -13,6 +13,7 @@ poetry = "1.1.13"
 bs4 = "^0.0.1"
 pandas = "^2.0.3"
 requests = "^2.31.0"
+beautifulsoup4 = "4.12.2"
 
 [tool.poetry.dev-dependencies]
 debugpy = "^1.6.2"
