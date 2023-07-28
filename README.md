@@ -1,4 +1,4 @@
-[Faiz](https://github.com/faiz135753)做的Cakeresume爬蟲，我改成Pandas的版本，讓他在Linux上也便於使用
+[Faiz](https://github.com/faiz135753)做的Cakeresume爬蟲，我改成Pandas的版本，讓它在Linux上也便於使用
 
 ***
 ### 使用方式
