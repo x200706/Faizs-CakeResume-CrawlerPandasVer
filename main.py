@@ -41,9 +41,14 @@ for serach_job in list_serach_job:
         class_=
         'InlineMessage_inlineMessage__I9C_W InlineMessage_inlineMessageLarge__yeH0A InlineMessage_inlineMessageDark__rNo_a'
       )[2].text
-      print(job_title, job_url, company_title, salary)
-      job51 = salary[0:salary.find('/')]
-      job52 = salary[salary.find('/') + 1:len(salary)].replace(" ", "")
+      location = job.find_all(
+        'div',
+        class_=
+        'InlineMessage_inlineMessage__I9C_W InlineMessage_inlineMessageLarge__yeH0A InlineMessage_inlineMessageDark__rNo_a'
+      )[1].text
+      print(job_title, job_url, company_title, salary, location)
+      salary_part1 = salary[0:salary.find('/')]
+      salary_part2 = salary[salary.find('/') + 1:len(salary)].replace(" ", "")
       price = ''
       for word in salary:
         if word == '0' or word == '1' or word == '2' or word == '3' or word == '4' or word == '5' or word == '6' or word == '7' or word == '8' or word == '9' or word == '.' or word == '~' or word == '萬':
@@ -64,6 +69,9 @@ for serach_job in list_serach_job:
           '職缺連結': job_url,
           '公司名稱': company_title,
           '薪水': salary,
+          '最低薪資': low_price,
+          '最高薪資': high_price,
+          '地區': location
         },
         ignore_index=True)
     print("頁數", page)
