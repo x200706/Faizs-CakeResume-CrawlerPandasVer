@@ -8,7 +8,7 @@ import pandas as pd
 list_serach_job = ["後端工程師", "軟體工程師", "Java", "Django"]
 
 # 创建一个空的DataFrame用于存储数据
-df = pd.DataFrame(columns=['職缺名稱', '職缺連結', '公司名稱', '薪水', '地區'])
+df = pd.DataFrame(columns=['職缺名稱', '職缺連結', '公司名稱', '薪水', '最高薪資', '最低薪資', '地區'])
 
 for serach_job in list_serach_job:
   page = 0
